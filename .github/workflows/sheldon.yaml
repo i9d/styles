@@ -77,15 +77,6 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-        with:
-            fetch-depth: 0
-      - name: Copy To Branches Action
-        uses: planetoftheweb/copy-to-branches@v1
-        env:
-            files: composer.json
-            branches: hmg
-            key: master
 #      - name: Bump version and push tag
 #        id: tag_version
 #        uses: mathieudutour/github-tag-action@v5.6
@@ -101,4 +92,12 @@ jobs:
 #          tag_name: ${{ steps.tag_version.outputs.new_tag }}
 #          release_name: Release ${{ steps.tag_version.outputs.new_tag }}
 #          body: ${{ steps.tag_version.outputs.changelog }}
-
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Copy To Branches Action
+        uses: planetoftheweb/copy-to-branches@v1
+        env:
+          files: composer.json
+          branches: v1.0.1
+          key: master
