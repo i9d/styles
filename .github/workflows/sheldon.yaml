@@ -109,6 +109,7 @@ jobs:
         run: |
           git config --global user.email "nikita.profatylo.adci@gmail.com"
           git config --global user.name "[Action] Get composer.json"
+          git diff
           git checkout v1.0.1
           git checkout master -- composer.json
           git add composer.json
