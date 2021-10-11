@@ -102,11 +102,16 @@ jobs:
 #          files: composer.json
 #          branches: v1.0.1
 #          key: master
-      - name: Get fetch
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Get composer.json
         run: |
-          git config --global user.name "${GITHUB_ACTOR}"
-          git config --global user.email "${INPUT_EMAIL}"
-          git fetch origin
           git checkout v1.0.1
           git checkout master -- composer.json
+          git add composer.json
+          git commit -m "Edit composer.json"
+          git push --set-upstream origin v1.0.1
+          git checkout master
+          
 
