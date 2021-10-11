@@ -84,7 +84,7 @@ jobs:
         uses: planetoftheweb/copy-to-branches@v1
         env:
             files: composer.json
-            branches: v1.0.1
+            branches: hmg
             key: master
 #      - name: Bump version and push tag
 #        id: tag_version
