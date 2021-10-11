@@ -103,7 +103,7 @@ jobs:
 #          branches: v1.0.1
 #          key: master
       - name: Get fetch
-      - run: |
+        run: |
           git fetch origin
           git checkout v1.0.1
           git checkout master -- composer.json
