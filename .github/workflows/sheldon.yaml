@@ -109,12 +109,23 @@ jobs:
         run: |
           git config --global user.email "nikita.profatylo.adci@gmail.com"
           git config --global user.name "[Action] Get composer.json"
-          git diff
+          action1=`git diff --name-status v1.0.1 master composer.json | cut -c 1`
           git checkout v1.0.1
-          git checkout master -- composer.json
-          git add composer.json
-          git commit -m "Edit composer.json"
-          git push --set-upstream origin v1.0.1
-          git checkout master
+          action2=`git diff --name-status v1.0.1 master composer.json | cut -c 1`
+          if [ "$action1" = "M" ] || [ "$action1" = "A" ]; then # M - mod A - add  D - del ;
+            git checkout master -- composer.json
+            git add composer.json
+            git commit -m "Edit composer.json"
+            git push --set-upstream origin v1.0.1
+            git checkout master
+          else
+            if [ "$action2" = "D" ]; then
+              git rm composer.json
+              git commit -m "Edit composer.json"
+              git push --set-upstream origin v1.0.1
+              git checkout master
+            fi
+          fi
+
           
 
