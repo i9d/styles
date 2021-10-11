@@ -92,3 +92,10 @@ jobs:
           tag_name: ${{ steps.tag_version.outputs.new_tag }}
           release_name: Release ${{ steps.tag_version.outputs.new_tag }}
           body: ${{ steps.tag_version.outputs.changelog }}
+      - name: Checkout on v1.0.1
+#        uses: actions/checkout@v2
+        run: git checkout v1.0.1
+      - name: Add composer.json
+        run: git checkout master composer.json
+      - name: Checkout on master
+        run: git checkout master
