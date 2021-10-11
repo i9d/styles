@@ -1,29 +1,29 @@
-#name: Merge to release
-#
-#on:
-#  push:
-#    branches:
-#      - master
-#  workflow_dispatch:
-#    inputs:
-#      commit_message:
-#        description: Commit message
-#        required: true
-#
-#jobs:
-#  release:
-#    runs-on: ubuntu-latest
-#    env:
-#      GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
-#      DISTRIBUTION_UPDATER_TOKEN: "${{ secrets.DISTRIBUTION_UPDATER_TOKEN }}"
-#    steps:
-#    - uses: actions/checkout@v2
-#      if: github.event_name == 'push'
-#    - uses: actions/checkout@v2
-#      if: github.event_name == 'workflow_dispatch'
-#      with:
-#        fetch-depth: 0
-#
+name: Merge to release
+
+on:
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+    inputs:
+      commit_message:
+        description: Commit message
+        required: true
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+      DISTRIBUTION_UPDATER_TOKEN: "${{ secrets.DISTRIBUTION_UPDATER_TOKEN }}"
+    steps:
+    - uses: actions/checkout@v2
+      if: github.event_name == 'push'
+    - uses: actions/checkout@v2
+      if: github.event_name == 'workflow_dispatch'
+      with:
+        fetch-depth: 0
+
 #    - name: Release branch version
 #      id: release
 #      run: echo ::set-output name=branch::v1.0.1
