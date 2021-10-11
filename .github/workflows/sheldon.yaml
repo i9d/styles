@@ -84,10 +84,8 @@ jobs:
           git config --global user.email "nikita.profatylo.adci@gmail.com"
           git config --global user.name "[Action] Get composer.json"
           action1=`git diff --name-status v1.0.1 master composer.json | cut -c 1`
-          echo $action1
           git checkout v1.0.1
           action2=`git diff --name-status v1.0.1 master composer.json | cut -c 1`
-          echo $action2
           if [ "$action1" = "M" ] || [ "$action1" = "A" ]; then # M - mod A - add  D - del ;
             git checkout master -- composer.json
             git add composer.json
