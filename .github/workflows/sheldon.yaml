@@ -92,6 +92,10 @@ jobs:
 #          tag_name: ${{ steps.tag_version.outputs.new_tag }}
 #          release_name: Release ${{ steps.tag_version.outputs.new_tag }}
 #          body: ${{ steps.tag_version.outputs.changelog }}
+      - name: switching from HTTPS to SSH
+        run: git remote set-url origin ${{ secrets.ssh }}
+      - name: check for changes
+        run: git status
       - name: Checkout on v1.0.1
 #        uses: actions/checkout@v2
         run: git checkout v1.0.1
