@@ -1,0 +1,20 @@
+{
+    "name": "adci/csl-styles",
+    "description": "Provide a CSL citation styles",
+    "license": "MIT",
+    "type": "library",
+    "keywords": [
+        "styles",
+        "csl"
+    ],
+    "authors": [
+        {
+            "name": "ADCI Solutions",
+            "homepage": "https://www.adcisolutions.com"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/adci-nikitap/styles/issues",
+        "source": "https://github.com/adci-nikitap/styles"
+    }
+}

@@ -99,18 +99,18 @@ jobs:
 
     # https://styles-update.zotero.org:8826/ is for Zotero (styles page, API's citation server, client style updates, etc.)
     - name: ping Zotero servers
-      if: github.repository == 'citation-style-language/styles'
+      if: github.repository == 'adci-nikitap/styles'
       run: |
         curl -H 'Content-Length:' -H "Authorization: $ZOTERO_UPDATE_TOKEN" -F 'payload={"type":"push","branch":"${{ steps.release.outputs.branch }}","status":0,"commit":"'$GITHUB_SHA'"}' https://styles-update.zotero.org:8826/
 
     - name: Copy workflows to locales repository
-      if: github.repository == 'citation-style-language/styles' && steps.update.outputs.workflows == 'true'
+      if: github.repository == 'adci-nikitap/styles' && steps.update.outputs.workflows == 'true'
       uses: drud/action-cross-commit@master
       with:
         source-folder: .github/workflows
-        destination-repository: https://csl-bot:${{ secrets.CSLBOT_TOKEN }}@github.com/citation-style-language/locales
+        destination-repository: https://csl-bot:${{ secrets.CSLBOT_TOKEN }}@github.com/adci-nikitap/locales
         destination-folder: .github/workflows
         destination-branch: master
         git-user: "csl-bot"
-        git-user-email: github@citationstyles.org
+        git-user-email: nikita.profatylo.adci@gmail.com
         git-commit-message: copied ${{ steps.update.outputs.workflows_files }} from styles
