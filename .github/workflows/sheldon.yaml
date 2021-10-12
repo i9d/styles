@@ -85,17 +85,11 @@ jobs:
         git config --global user.name "[Action] Get composer.json"
         
         echo "======================================================"
-        git branch
-        echo "======================================================"
         git fetch origin
         git checkout -b v1.0.1 origin/v1.0.1
-        git branch
-        
+        git checkout master
         echo "======================================================"
-        
         action1=`git diff --name-status v1.0.1 master composer.json | cut -c 1`
-        git branch
-        git show
         git checkout v1.0.1
         action2=`git diff --name-status v1.0.1 master composer.json | cut -c 1`
         if [ "$action1" = "M" ] || [ "$action1" = "A" ]; then # M - mod A - add  D - del ;
