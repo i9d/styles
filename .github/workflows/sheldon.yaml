@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
-      IS_COMPOSER_MODIFIED: false
+
     steps:
     # owner-test just checks out the PR -- this has an exfiltration risk, make SURE that
     # this can only be triggered by people with repo write access -- such as people that can add
