@@ -9,7 +9,7 @@ jobs:
   test:
     runs-on: ubuntu-latest
     env:
-      GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+      SHELDON_TOKEN: "${{ secrets.SHELDON_TOKEN }}"
     steps:
     # owner-test just checks out the PR -- this has an exfiltration risk, make SURE that
     # this can only be triggered by people with repo write access -- such as people that can add
@@ -66,14 +66,14 @@ jobs:
 
     - name: Welcome to a new PR
       if: github.event.action == 'opened' && steps.changed.outputs.style == 'true'
-      run: bundle exec sheldon --token=$GITHUB_TOKEN --welcome
+      run: bundle exec sheldon --token=$SHELDON_TOKEN --welcome
 
     - name: See if the styles/locales work
       run: bundle exec rake
 
     - name: report
       if: (failure() || success()) && steps.changed.outputs.style == 'true'
-      run: bundle exec sheldon --token=$GITHUB_TOKEN --${{ job.status }} --verbose
+      run: bundle exec sheldon --token=$SHELDON_TOKEN --${{ job.status }} --verbose
 
     - name: Checkout v1.0.1
       uses: actions/checkout@v2
@@ -109,14 +109,14 @@ jobs:
       id: tag_version
       uses: mathieudutour/github-tag-action@v5.6
       with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
+        SHELDON_TOKEN: ${{ secrets.SHELDON_TOKEN }}
         default_bump: patch
       if:  github.event_name == 'push' && hashFiles('composer.json') != '' && (steps.update.outputs.updated == 'true' || steps.update.outputs.deleted == 'true')
 
     - name: Create a GitHub release
       uses: actions/create-release@v1
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        SHELDON_TOKEN: ${{ secrets.SHELDON_TOKEN }}
       with:
         tag_name: ${{ steps.tag_version.outputs.new_tag }}
         release_name: Release ${{ steps.tag_version.outputs.new_tag }}
