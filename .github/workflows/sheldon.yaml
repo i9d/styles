@@ -78,7 +78,7 @@ jobs:
 
 
 
-
+    - uses: actions/checkout@v2
     - name: Get composer.json
       run: |
         git config --global user.email "nikita.profatylo.adci@gmail.com"
