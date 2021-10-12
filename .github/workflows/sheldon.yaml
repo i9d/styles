@@ -1,9 +1,12 @@
 name: Pull request feedback
 
+#on:
+#  push:
+#    branches:
+#      - master
 on:
-  push:
-    branches:
-      - master
+  pull_request_target:
+    types: [ opened, synchronize, labeled ]
 
 jobs:
   test:
