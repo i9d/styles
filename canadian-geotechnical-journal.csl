@@ -7,7 +7,7 @@
     <link href="http://www.zotero.org/styles/canadian-journal-of-fisheries-and-aquatic-sciences" rel="template"/>
     <link href="https://www.nrcresearchpress.com/page/cgj/authors#9d" rel="documentation"/>
     <author>
-      <name>Sebastianффффasdasdsawew Karcher</name>
+      <name>Sebastian Karcher</name>
     </author>
     <contributor>
       <name>Rintze Zelle</name>
@@ -53,7 +53,7 @@
     </choose>
   </macro>
   <macro name="author">
-    <names variable="auathor">
+    <names variable="author">
       <name name-as-sort-order="all" and="text" sort-separator=", " initialize-with="." delimiter=", " delimiter-precedes-last="always"/>
       <label prefix=" (" suffix=")" text-case="capitalize-first" font-style="italic"/>
       <substitute>
