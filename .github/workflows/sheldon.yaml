@@ -102,7 +102,7 @@ jobs:
         else
           if [ "$action2" = "D" ]; then
             git rm composer.json
-            git commit -m "Edit composer.json"
+            git commit -m "Delete composer.json"
             git push --set-upstream origin v1.0.1
             git checkout master
           fi
