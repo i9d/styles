@@ -81,13 +81,13 @@ jobs:
         ref: v1.0.1
     - name: Fetch master branch
       run: |
-        echo "=================="
+        echo "======================================================"
         git branch
-        echo "=================="
+        echo "======================================================"
         git fetch origin master
-        git checkout origin/master
-        git pull origin master
-        echo "=================="
+        git checkout master
+#        git pull origin master
+        echo "======================================================"
         git branch
     - name: Get composer.json
       run: |
