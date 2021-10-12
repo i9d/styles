@@ -77,12 +77,13 @@ jobs:
 #      run: bundle exec sheldon --token=$GITHUB_TOKEN --${{ job.status }} --verbose
 
 
-    - uses: actions/checkout@v1
-      with:
-        ref: v1.0.1
-    - uses: actions/checkout@v1
+      - uses: actions/checkout@v1
       with:
         ref: master
+      - uses: actions/checkout@v1
+      with:
+        ref: v1.0.1
+
     - name: Get composer.json
       run: |
         echo "======================================================"
