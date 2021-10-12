@@ -84,12 +84,12 @@ jobs:
         git config --global user.email "nikita.profatylo.adci@gmail.com"
         git config --global user.name "[Action] Get composer.json"
         
-        git fetch origin
         echo "======================================================"
         git branch
         echo "======================================================"
         git checkout v1.0.1 origin/v1.0.1
         git branch
+        
         echo "======================================================"
         
         action1=`git diff --name-status v1.0.1 master composer.json | cut -c 1`
