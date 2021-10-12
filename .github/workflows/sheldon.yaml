@@ -10,7 +10,6 @@ jobs:
     runs-on: ubuntu-latest
     env:
       GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
-
     steps:
     # owner-test just checks out the PR -- this has an exfiltration risk, make SURE that
     # this can only be triggered by people with repo write access -- such as people that can add
@@ -76,8 +75,6 @@ jobs:
 #      if: (failure() || success()) && steps.changed.outputs.style == 'true'
 #      run: bundle exec sheldon --token=$GITHUB_TOKEN --${{ job.status }} --verbose
 
-
-
     - name: Checkout v1.0.1
       uses: actions/checkout@v2
       with:
@@ -99,7 +96,6 @@ jobs:
           git commit -m "Edit composer.json"
           git push --set-upstream origin v1.0.1
           git checkout master
-          export IS_COMPOSER_MODIFIED='true'
         else
           if [ "$action2" = "D" ]; then
             git rm composer.json
@@ -112,20 +108,20 @@ jobs:
     - name: Print ebv
       run: |
         echo $IS_COMPOSER_MODIFIED
-#    - name: Bump version and push tag
-#      id: tag_version
-#      uses: mathieudutour/github-tag-action@v5.6
-#      with:
-#        github_token: ${{ secrets.GITHUB_TOKEN }}
-#        default_bump: patch
-#      if: github.event_name == 'push' && env.IS_COMPOSER_MODIFIED == 'true'
-#
-#    - name: Create a GitHub release
-#      uses: actions/create-release@v1
-#      env:
-#        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-#      with:
-#        tag_name: ${{ steps.tag_version.outputs.new_tag }}
-#        release_name: Release ${{ steps.tag_version.outputs.new_tag }}
-#        body: ${{ steps.tag_version.outputs.changelog }}
-#      if: env.IS_COMPOSER_MODIFIED == 'true'
+    - name: Bump version and push tag
+      id: tag_version
+      uses: mathieudutour/github-tag-action@v5.6
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        default_bump: patch
+      if:  github.event_name == 'push' && hashFiles('composer.json') != '' && (steps.update.outputs.updated == 'true' || steps.update.outputs.deleted == 'true')
+
+    - name: Create a GitHub release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ steps.tag_version.outputs.new_tag }}
+        release_name: Release ${{ steps.tag_version.outputs.new_tag }}
+        body: ${{ steps.tag_version.outputs.changelog }}
+      if:  github.event_name == 'push' && hashFiles('composer.json') != '' && (steps.update.outputs.updated == 'true' || steps.update.outputs.deleted == 'true')
