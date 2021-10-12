@@ -77,14 +77,15 @@ jobs:
 #      run: bundle exec sheldon --token=$GITHUB_TOKEN --${{ job.status }} --verbose
 
 
-    - uses: actions/checkout@v1
-    - uses: actions/checkout@v1
-      with:
-        ref: v1.0.1
+
 
     - name: Get composer.json
       run: |
+        git fetch origin
         echo "======================================================"
+        git branch
+        echo "======================================================"
+        git checkout v1.0.1 origin/v1.0.1
         git branch
         echo "======================================================"
         git config --global user.email "nikita.profatylo.adci@gmail.com"
