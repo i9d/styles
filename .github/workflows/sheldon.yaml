@@ -99,7 +99,7 @@ jobs:
           git commit -m "Edit composer.json"
           git push --set-upstream origin v1.0.1
           git checkout master
-          export IS_COMPOSER_MODIFIED=true
+          export IS_COMPOSER_MODIFIED='true'
         else
           if [ "$action2" = "D" ]; then
             git rm composer.json
@@ -109,26 +109,23 @@ jobs:
           fi
         fi
 
-    - name: Bump version and push tag
-      id: tag_version
-      uses: mathieudutour/github-tag-action@v5.6
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        default_bump: patch
-      if: github.event_name == 'push' && env.IS_COMPOSER_MODIFIED == 'true'
-
-    - name: Create a GitHub release
-      uses: actions/create-release@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        tag_name: ${{ steps.tag_version.outputs.new_tag }}
-        release_name: Release ${{ steps.tag_version.outputs.new_tag }}
-        body: ${{ steps.tag_version.outputs.changelog }}
-      if: env.IS_COMPOSER_MODIFIED == 'true'
-
-
-
-
-        
-
+    - name: Print ebv
+      run: |
+        echo $IS_COMPOSER_MODIFIED
+#    - name: Bump version and push tag
+#      id: tag_version
+#      uses: mathieudutour/github-tag-action@v5.6
+#      with:
+#        github_token: ${{ secrets.GITHUB_TOKEN }}
+#        default_bump: patch
+#      if: github.event_name == 'push' && env.IS_COMPOSER_MODIFIED == 'true'
+#
+#    - name: Create a GitHub release
+#      uses: actions/create-release@v1
+#      env:
+#        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#      with:
+#        tag_name: ${{ steps.tag_version.outputs.new_tag }}
+#        release_name: Release ${{ steps.tag_version.outputs.new_tag }}
+#        body: ${{ steps.tag_version.outputs.changelog }}
+#      if: env.IS_COMPOSER_MODIFIED == 'true'
