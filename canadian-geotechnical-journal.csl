@@ -53,7 +53,7 @@
     </choose>
   </macro>
   <macro name="author">
-    <names variable="author">
+    <names variable="auathor">
       <name name-as-sort-order="all" and="text" sort-separator=", " initialize-with="." delimiter=", " delimiter-precedes-last="always"/>
       <label prefix=" (" suffix=")" text-case="capitalize-first" font-style="italic"/>
       <substitute>
