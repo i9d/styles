@@ -77,6 +77,8 @@ jobs:
 #      run: bundle exec sheldon --token=$GITHUB_TOKEN --${{ job.status }} --verbose
 
     - uses: actions/checkout@v2
+      with:
+        ref: master
     - uses: actions/checkout@v2
       with:
         ref: v1.0.1
