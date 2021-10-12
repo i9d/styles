@@ -84,11 +84,12 @@ jobs:
         ref: v1.0.1
     - name: Update composer.json
       run: |
-      
-        echo "======================================================"
+        git config --global user.email "nikita.profatylo.adci@gmail.com"
+        git config --global user.name "[Action] Get composer.json"
+        
         git fetch origin
         git checkout -b master origin/master
-        echo "======================================================"
+        
         action1=`git diff --name-status v1.0.1 master composer.json | cut -c 1`
         git checkout v1.0.1
         action2=`git diff --name-status v1.0.1 master composer.json | cut -c 1`
@@ -98,7 +99,7 @@ jobs:
           git commit -m "Edit composer.json"
           git push --set-upstream origin v1.0.1
           git checkout master
-          IS_COMPOSER_MODIFIED='true'
+          export IS_COMPOSER_MODIFIED=true
         else
           if [ "$action2" = "D" ]; then
             git rm composer.json
