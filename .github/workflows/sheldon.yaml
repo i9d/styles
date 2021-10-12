@@ -86,7 +86,6 @@ jobs:
         echo "======================================================"
         git fetch origin master
         git checkout master
-#        git pull origin master
         echo "======================================================"
         git branch
     - name: Get composer.json
