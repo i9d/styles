@@ -87,6 +87,7 @@ jobs:
         echo "======================================================"
         git branch
         echo "======================================================"
+        git fetch origin
         git checkout v1.0.1 origin/v1.0.1
         git branch
         
